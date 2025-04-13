@@ -3,7 +3,6 @@ package lib_user
 import (
 	"context"
 	"errors"
-	"fmt"
 	"regexp"
 
 	"github.com/go-playground/validator/v10"
@@ -14,7 +13,7 @@ func userNameValidator(ctx context.Context, fl validator.FieldLevel) error {
 	username := fl.Field().String()
 
 	if len(username) < 3 || len(username) > 20 {
-		return fmt.Errorf("username must be between 3 and 20 characters long")
+		return errors.New("username must be between 3 and 20 characters long")
 	}
 
 	pattern := "^[a-zA-Z0-9_.-]+$"
@@ -31,7 +30,7 @@ func validationCodeValidator(ctx context.Context, fl validator.FieldLevel) error
 	validationCode := fl.Field().String()
 
 	if len(validationCode) != 6 {
-		return fmt.Errorf("validation code must be 6 characters long")
+		return errors.New("validation code must be 6 characters long")
 	}
 
 	pattern := "^[0-9]+$"
