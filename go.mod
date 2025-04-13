@@ -20,4 +20,3 @@ require (
 	golang.org/x/text v0.22.0 // indirect
 )
 
-replace github.com/yeencloud/lib-shared => ../../lib-technical/lib-shared
