@@ -1,10 +1,10 @@
 module github.com/yeencloud/lib-user
 
-go 1.23
+go 1.25
 
 require (
 	github.com/go-playground/validator/v10 v10.26.0
-	github.com/yeencloud/lib-shared v0.2.9
+	github.com/yeencloud/lib-shared v0.2.11
 )
 
 require (
@@ -19,4 +19,3 @@ require (
 	golang.org/x/sys v0.30.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 )
-

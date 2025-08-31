@@ -1,4 +1,4 @@
-package lib_user
+package libuser
 
 import (
 	"context"
@@ -9,18 +9,18 @@ import (
 	"github.com/yeencloud/lib-shared/validation"
 )
 
+var usernameRegexp = regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9]+$")
+var validationCodeRegexp = regexp.MustCompile("^[0-9]+$")
+
 func userNameValidator(ctx context.Context, fl validator.FieldLevel) error {
 	username := fl.Field().String()
 
-	if len(username) < 3 || len(username) > 20 {
-		return errors.New("username must be between 3 and 20 characters long")
+	if len(username) < 3 {
+		return errors.New("username must be at least 3 characters long")
 	}
 
-	pattern := "^[a-zA-Z0-9_.-]+$"
-	re := regexp.MustCompile(pattern) // TODO: MustCompile should be used only once for performance
-
-	if !re.MatchString(username) {
-		return errors.New("username can only contain letters, digits, underscores, hyphens, or dots")
+	if !usernameRegexp.MatchString(username) {
+		return errors.New("username must start with a letter and can only contain numbers and letters")
 	}
 
 	return nil
@@ -33,10 +33,7 @@ func validationCodeValidator(ctx context.Context, fl validator.FieldLevel) error
 		return errors.New("validation code must be 6 characters long")
 	}
 
-	pattern := "^[0-9]+$"
-	re := regexp.MustCompile(pattern) // TODO: MustCompile should be used only once for performance
-
-	if !re.MatchString(validationCode) {
+	if !validationCodeRegexp.MatchString(validationCode) {
 		return errors.New("validation code can only contain digits")
 	}
 
